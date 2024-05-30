@@ -2,7 +2,21 @@
 
 ## Package
 
+### Description
+
+Package is created to provide API for face verification task.
+
+#### Supported Models
+VGG-Face
+
+### Supported Detectors
+OpenCV (cv2)
+
 ### Tests
+
+```
+pytest tests/verification_modules
+```
 
 ### Build
 
@@ -19,11 +33,6 @@ python -m build
 To install package from PyPI (will be available soon):
 ```
 pip install face-verification-modules
-```
-
-To install package from GIT:
-```
-SOON
 ```
 
 ## Web application
