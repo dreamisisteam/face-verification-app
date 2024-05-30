@@ -1,0 +1,61 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include=[
+    "verification_modules",
+    "verification_modules.detectors",
+    "verification_modules.models",
+]
+
+[project]
+name = "face-verification-modules"
+version = "0.0.1a"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2",
+    "matplotlib>=3.6",
+    "scikit-learn>=1.5.0",
+    "opencv-python>=4.8",
+    "tensorrt>=8.6",
+    "tensorflow>=2.15",
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "Kirill Vershinin", email = "kir9ver@gmail.com"},
+  {name = "Ksenia Bashurina", email = "bashksusha@mail.ru"}
+]
+maintainers = [
+  {name = "Kirill Vershinin", email = "kir9ver@gmail.com"}
+]
+description = "Face Verification Modules"
+keywords = ["cv", "ml", "face verification"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Repository = "https://github.com/dreamisisteam/face-verification-app"
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+]
+dev = [
+    "verification_modules[tests]",
+    "pylint",
+    "black",
+]
+cuda = [
+    "tensorflow[cuda]",
+]
+
+[project.scripts]
+verification_modules = "verification_modules:main"
