@@ -40,6 +40,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
 ]
+readme = "README.md"
 
 [project.urls]
 Repository = "https://github.com/dreamisisteam/face-verification-app"

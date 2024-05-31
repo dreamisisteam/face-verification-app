@@ -6,32 +6,10 @@ on:
 
 jobs:
   build:
-    name: Build distribution
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.dev.txt
-    - name: Build
-      run: |
-        make build
-    - name: Store the distribution packages
-      uses: actions/upload-artifact@v3
-      with:
-        name: python-package-distributions
-        path: dist/
-
+    uses: ./.github/workflows/build.yml
   publish-to-testpypi:
     name: Publish Python distribution to TestPyPI
-    needs:
-    - build
+    needs: [ build ]
     runs-on: ubuntu-latest
 
     environment:
