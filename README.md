@@ -1,5 +1,15 @@
 # face-verification-app
 
+App to make experiments on face verification tasks.
+
+## Pre-requirements
+
+Get pretrained models weights:
+```
+# VGG-Face
+https://www.kaggle.com/datasets/acharyarupak391/vggfaceweights/
+```
+
 ## Package
 
 ### Description
@@ -9,7 +19,7 @@ Package is created to provide API for face verification task.
 #### Supported Models
 VGG-Face
 
-### Supported Detectors
+#### Supported Detectors
 OpenCV (cv2)
 
 ### Tests
@@ -24,8 +34,7 @@ We use pyproject.toml as config of package.
 
 To build package you need to install "build" library:
 ```
-pip install build
-python -m build
+make build
 ```
 
 ### Install
@@ -37,4 +46,12 @@ pip install face-verification-modules
 
 ## Web application
 
-In process ...
+To start web application use:
+```
+make run_api
+```
+
+If you want to turn on developer mode:
+```
+fastapi dev api/app.py
+```
