@@ -46,9 +46,9 @@ async def process_vefification(
             images_raw=image_binaries,
         )
     except ValueError as ex:
-        raise HTTPException(status=400, detail=str(ex))
+        raise HTTPException(status_code=400, detail=str(ex))
     except Exception as ex:
-        raise HTTPException(status=500, detail=str(ex))
+        raise HTTPException(status_code=500, detail=str(ex))
 
     return {
         "result": result,

@@ -79,7 +79,35 @@ async def test_process_verifiaction__invalid_file_format(
     mock_model_verification.assert_not_called()
 
 
-def _get_files(image_dir, images_names: tuple[str] = None):
+@pytest.mark.parametrize('error, expected_status_code', (
+        (ValueError, 400), (KeyError, 500),
+))
+async def test_process_verification__raised_error(
+        mocker, client: AsyncClient, image_dir: Path,
+        error: Exception, expected_status_code: int,
+):
+    """ POST /api/v1/verificate/ - error on processing """
+    files = _get_files(image_dir)
+
+    def _side_effect_error(*args, **kwargs):
+        raise error()
+
+    mocker.patch(
+        'verification_modules.models.vgg_face.VGGFaceModel.prepare_model',
+        return_value=None,
+    )
+    validation_mocker = mocker.patch(
+        'verification_modules.models.base.BaseVerificationModel.run_verification',
+        side_effect=_side_effect_error,
+    )
+
+    response = await client.post('/api/v1/verificate/', files=files)
+    assert response.status_code == expected_status_code
+
+    validation_mocker.assert_called_once()
+
+
+def _get_files(image_dir: Path, images_names: tuple[str] = None):
     iamges_names = images_names or ('test_image_1.jpg', 'test_image_2.jpeg')
     return [('files', open(image_dir / image_name, 'rb'))
             for image_name in iamges_names]
